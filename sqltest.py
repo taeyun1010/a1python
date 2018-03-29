@@ -1,4 +1,14 @@
+import pip
+
+def install(package):
+    pip.main(['install', package])
+
+# Example
+install('pyodbc')
+
 import pyodbc
+
+
 server = 'mynewserver-20180328.database.windows.net'
 database = 'assignment1'
 username = 'ServerAdmin'
@@ -21,6 +31,7 @@ cursor = cnxn.cursor()
       
      
 with open("hashedPasswords.txt") as f:
+#with open("Yahoo_accounts_md5_rainbowtable.txt") as f:
     content = f.readlines()
 # you may also want to remove whitespace characters like `\n` at the end of each line
 content = [x.strip() for x in content]
@@ -32,7 +43,8 @@ for i in range(len(content)):
     thiscontent = content[i]
     #for split in thiscontent.split(":"):
     split = thiscontent.split(":")
-    hash = split[2]
+    #print("split len = " + str(len(split)))
+    hash = split[(len(split) - 1)]
     hash = "'" + hash + "'"
     query = "SELECT [Plaintext] FROM [dbo].[Hashes] h WHERE [Hash] = " 
     query = query + hash
